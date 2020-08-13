@@ -210,6 +210,10 @@ header #title{
         font-size: 6.4rem;
     }
 
+    .spots:hover{
+        background-color: var(--spots-background-color);
+    }
+
     #container #scoreBoard{
         width: 80%;
         height:25rem;
