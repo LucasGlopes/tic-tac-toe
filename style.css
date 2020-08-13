@@ -80,11 +80,13 @@ header #title{
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     grid-template-areas:
         "score score"
+        "score score"
         "xPlayer oPlayer"
-        "xPlayer oPlayer";
+        "xScore oScore"
+        "xScore oScore";
 
     width: 400px;
     height: 300px;
@@ -109,44 +111,65 @@ header #title{
 #container #scoreBoard #oplayer{
     color: var(--text-primary-color);
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     font-family: 'Eczar', sans-serif;
     font-size: 20px;
 }
 
 #container #scoreBoard #xplayer{
     border-right: 3px solid var(--board-primary-color);
+    border-bottom: 3px solid var(--board-primary-color);
     
     grid-area: xPlayer;
 
+    padding: 5px;
+
     margin-top: 0;
     margin-bottom: 0;
-}
-
-#container #scoreBoard #oplayer{
-    grid-area: oPlayer;
-
-    margin-top: 0;
-    margin-right: 0;
-}
-
-#container #scoreBoard #xplayer header,
-#container #scoreBoard #oplayer header{
-    border-bottom: 3px solid var(--board-primary-color);
-    
-    padding: 5px;
 
     text-align: center;
 }
 
-#container #scoreBoard #xplayer #xScore,
-#container #scoreBoard #oplayer #oScore{
+#container #scoreBoard #oplayer{
+    border-bottom: 3px solid var(--board-primary-color);
+
+    grid-area: oPlayer;
+
+    padding: 5px;
+
+    margin-top: 0;
+    margin-bottom: 0;
+
+    text-align: center;
+}
+
+#container #scoreBoard #xScore{
+    border-right: 3px solid var(--board-primary-color);
+
+    grid-area: xScore;
+}
+
+#container #scoreBoard #oScore{
+    grid-area: oScore;
+}
+
+#container #scoreBoard #xScore,
+#container #scoreBoard #oScore{
     display: flex;
     align-items: center;
     justify-content: center;
 
     font-family: 'Eczar', sans-serif;
-    font-size: 85px;
+    font-size: 50px;
+
+    margin-top: 0;
+    margin-bottom: 0;
 }
+
+
 
 @media (max-width: 1100px){
     header{
@@ -155,7 +178,7 @@ header #title{
         justify-content: center;
 
         width: 100%;
-        height: 15rem;
+        height: 18rem;
 
         margin-bottom: 2rem;
     }
@@ -167,6 +190,9 @@ header #title{
     #container{
         display: flex;
         flex-direction: column-reverse;
+        align-items: center;
+
+        width: 100%;
     }
 
     #container #board{
@@ -174,11 +200,33 @@ header #title{
 
         grid-gap: 1.8rem;
 
+        margin-bottom: 8rem;
+
         width: 40rem;
         height: 40rem;
     }
 
     .spots{
         font-size: 6.4rem;
+    }
+
+    #container #scoreBoard{
+        width: 80%;
+        height:25rem;
+
+    }
+
+    #container #scoreBoard #scoreHeader{
+        font-size: 4rem;
+    }
+
+    #container #scoreBoard #xplayer,
+    #container #scoreBoard #oplayer{
+        font-size: 2.5rem;
+    }   
+
+    #container #scoreBoard #xScore,
+    #container #scoreBoard #oScore{
+        font-size: 5.5rem;
     }
 }
