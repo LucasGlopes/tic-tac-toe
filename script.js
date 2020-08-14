@@ -1,7 +1,6 @@
 const Gameboard = (function() {
     const board = document.querySelector('#board');
 
-    //const spots = Array.from({length: 9});
     const spots = [];
     const winningCombinations = [
         [0, 1 , 2],
@@ -38,7 +37,7 @@ const Gameboard = (function() {
         });
     }
 
-    function clearSpots(){
+    function resetGame(){
         spots.forEach(spot => {
             spot.textContent = "";
             spotsMarked = 0;
@@ -49,11 +48,11 @@ const Gameboard = (function() {
     return {
         createBoard,
         markSpot,
-        clearSpots,
+        resetGame,
     };
 })();
 
-const Player = (name, choice) => {
+const Player = (choice) => {
     let score = 0;
 
     const setScore = () => {
@@ -62,15 +61,12 @@ const Player = (name, choice) => {
 
     const getScore = () => score;
     
-    const getName = () => name;
-
     const getChoice = () => choice;
 
 
     return{
         setScore,
         getScore,
-        getName,
         getChoice,
     };
 }
@@ -87,30 +83,24 @@ const Validations = (() => {
     }
 
     function isSpotMarked(spot){
-        if(spot.textContent == 'X' || spot.textContent == 'O'){
-            alert("Spot Marked. Choose Another one!");
-            return true;
-        }else{ 
-            return false;
-        }
+        return (spot.textContent == 'X' || spot.textContent == 'O');
     }
 
     function checkWinner(spots, combinations, choice, spotsMarked){
-        const scoreBoard = document.querySelector("#scoreHeader");
         const xScore = document.querySelector("#xScore");
         const oScore = document.querySelector("#oScore");
         for(let i = 0; i < combinations.length; i++){
-            if(spots[combinations[i][0]].textContent == choice && spots[combinations[i][1]].textContent == choice &&
-                spots[combinations[i][2]].textContent == choice){
-                    //scoreBoard.textContent = `${choice} won!!!`;
-                    (choice == xPlayer.getChoice()) ? xPlayer.setScore() : oPlayer.setScore();
-                    console.log(xPlayer.getScore());
+            if(spots[combinations[i][0]].textContent == choice && spots[combinations[i][1]].textContent == choice && spots[combinations[i][2]].textContent == choice){
+                if(choice == xPlayer.getChoice()){
+                    xPlayer.setScore();
                     xScore.textContent = `${xPlayer.getScore()}`;
+                }else{
+                    oPlayer.setScore();
                     oScore.textContent = `${oPlayer.getScore()}`;
-                    Gameboard.clearSpots();
+                }
+                Gameboard.resetGame();
             }else if(spotsMarked == 9){
-                Gameboard.clearSpots();
-
+                Gameboard.resetGame();
             }
         }
     }
@@ -124,9 +114,7 @@ const Validations = (() => {
 )();
 
 Gameboard.createBoard();
-var xPlayer = Player('lucas','X');
-var oPlayer = Player('luca', 'O');
+var xPlayer = Player('X');
+var oPlayer = Player('O');
 
-//currentPlayer = xPlayer.getChoice();
-//spots.markSpot(currentPlayer);
 Gameboard.markSpot(xPlayer.getChoice(),oPlayer.getChoice());
